@@ -1,0 +1,162 @@
+
+
+\ProvidesPackage{preamble}
+
+% ==========================================
+% 1. Core Engine & Fonts
+% ==========================================
+\usepackage[english]{babel}
+
+\usepackage{amsmath, nccmath, mathtools}
+\usepackage[scaled=1.05]{eulerpx} % Greek/Extra math constants
+\usepackage{fontspec} % Required for loading .otf fonts
+\setmainfont{itc-serif-gothic-regular.otf}[
+    Path = ./itc-serif-gothic/,
+    BoldFont = itc-serif-gothic-extra-bold.otf,
+    ItalicFont = itc-serif-gothic-light.otf
+]
+% \usepackage{mathpazo}      % Serif math
+% Manually force digits to use the Euler (zeur) font in math mode
+\DeclareSymbolFont{eulernumbers}{U}{zeur}{m}{n}
+\DeclareMathSymbol{0}{\mathalpha}{eulernumbers}{"30}
+\DeclareMathSymbol{1}{\mathalpha}{eulernumbers}{"31}
+\DeclareMathSymbol{2}{\mathalpha}{eulernumbers}{"32}
+\DeclareMathSymbol{3}{\mathalpha}{eulernumbers}{"33}
+\DeclareMathSymbol{4}{\mathalpha}{eulernumbers}{"34}
+\DeclareMathSymbol{5}{\mathalpha}{eulernumbers}{"35}
+\DeclareMathSymbol{6}{\mathalpha}{eulernumbers}{"36}
+\DeclareMathSymbol{7}{\mathalpha}{eulernumbers}{"37}
+\DeclareMathSymbol{8}{\mathalpha}{eulernumbers}{"38}
+\DeclareMathSymbol{9}{\mathalpha}{eulernumbers}{"39}
+
+\linespread{1.25}
+\setlength\parindent{0pt}
+
+% ==========================================
+% 2. Colors & Page Theming (Dark Mode)
+% ==========================================
+\usepackage[dvipsnames, table]{xcolor}
+\definecolor{OWOrange}{RGB}{255,125,37} % setting up the outer wilds color-palette
+\definecolor{OWGreen}{RGB}{103,110,76}
+\definecolor{OWBlue}{RGB}{23,78,125}
+\definecolor{OWPurple}{RGB}{106,77,117}
+\definecolor{OWDark}{RGB}{11,30,38} % haven't found a use for this yet...
+
+\pagecolor{black}
+\color{white} % Set default text to white
+
+% Header/Footer
+\usepackage[margin=25mm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{1cm}
+%\lhead{
+%    \includegraphics[width=5cm]{images/System_Narrow.png}
+%}
+\lhead{
+    \begin{picture}(0,0)
+        \put(0,0){\includegraphics[width=5cm]{images/System_Narrow.png}}		
+    \end{picture}
+}
+\renewcommand{\headrulewidth}{0pt}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\Large\bfseries\color{OWOrange}}
+\titleformat*{\subsection}{\large\bfseries\color{OWOrange}}
+\titleformat*{\subsubsection}{\normalsize\bfseries\color{OWOrange}}
+
+
+% ==========================================
+% 3. Mathematics & Science
+% ==========================================
+
+\usepackage{amsfonts}
+\usepackage{xfrac}
+\usepackage{siunitx}
+\sisetup{
+    locale = US,
+    per-mode = fraction, 
+    fraction-function = \mfrac,
+    unit-mode = text, 
+    number-mode = math,
+    text-superscript-command = \eulersup,
+    text-subscript-command = \eulersub
+}
+\DeclareSIUnit{\astUnit}{AU}  % new units can be defined like here
+
+% ==========================================
+% 4. Graphics & TikZ
+% ==========================================
+\usepackage{graphicx, caption}
+\usepackage{float}
+\restylefloat*{figure}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{tikzsymbols}
+\usepackage{pgfplots}
+
+\usetikzlibrary{ %these are a lot of libraries I've collected over time, you probably  
+    arrows, shapes.geometric, chains, hobby, % won't use them all in one document...
+    intersections, calc, patterns.meta,
+    decorations.pathmorphing, patterns,
+    decorations.pathreplacing, calligraphy
+}
+
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=newest}
+
+% ==========================================
+% 5. Tables & Layout
+% ==========================================
+
+\usepackage{booktabs, array, multirow, tabularx}
+\usepackage{enumitem}
+\usepackage{soul} 
+
+% ==========================================
+% 6. References & Bibliography
+% ==========================================
+\usepackage[autostyle=true]{csquotes}
+\usepackage[style=authoryear, backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% Break URLs effectively
+\usepackage{xurl}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\setcounter{biburlnumpenalty}{9000}
+
+% Hyperref (Usually loaded last)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linktoc=all,
+    linkcolor=white, % Keep links white to match text
+    citecolor=OWOrange,
+    urlcolor=OWOrange
+}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{nameref}
+
+% ==========================================
+% 7. Custom Macros
+% ==========================================
+\newcommand{\abs}[1]{\lVert#1\rVert}
+\newcommand{\orangeRule}{\arrayrulecolor{OWOrange}}
+
+\newcommand\ellipsebyfoci[4]{       % allows to draw an ellipse by its focalpoints and 2 * r_periapsis, something I 
+  \path[#1] let \p1=(#2), \p2=(#3), \p3=($(\p1)!.5!(\p2)$) % found very useful when drawing orbits
+  in \pgfextra{
+    \pgfmathsetmacro{\angle}{atan2(\y2-\y1,\x2-\x1)}
+    \pgfmathsetmacro{\focal}{veclen(\x2-\x1,\y2-\y1)/2/1cm}
+    \pgfmathsetmacro{\lentotcm}{\focal*2*#4}
+    \pgfmathsetmacro{\axeone}{(\lentotcm - 2 * \focal)/2+\focal}
+    \pgfmathsetmacro{\axetwo}{sqrt((\lentotcm/2)*(\lentotcm/2)-\focal*\focal}
+  }
+  (\p3) ellipse[x radius=\axeone cm,y radius=\axetwo cm, rotate=\angle];
+} % shamelessly stolen from https://tex.stackexchange.com/questions/75017/draw-an-ellipse-from-the-two-focus-points-foci-and-the-sum-of-the-distances-fr
+
+% macros for ensuring \qty uses math font on exponents:
+\newcommand{\eulersup}[1]{\ensuremath{^{#1}}}
+\newcommand{\eulersub}[1]{\ensuremath{_{#1}}}
+

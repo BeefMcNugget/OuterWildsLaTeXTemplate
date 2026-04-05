@@ -1,0 +1,44 @@
+
+
+% This adds a mission patch, currently one centered. if you want both, i reccomend coordinaates (-2, 0) and (2, 0)
+\begin{center} 
+    \begin{tikzpicture}
+        \node[inner sep=0pt] (OwWi) at (0 ,0) {\includegraphics[width = 3cm]{./images/OuWi_Patch.PNG}};
+        % \node[inner sep=0pt] (NASA) at (0,0) {\includegraphics[width = 2.43cm]{./images/Artemis_II_patch.png}};
+    \end{tikzpicture}
+\end{center}
+% If you don't want the top page to be empty or fuilled with something else, adjust with \vspace*{}
+
+% \vspace*{4cm}
+
+\begin{center}
+    \Huge \color{OWOrange} The Universe Is, and We Are -- But Is It Really? 
+\end{center}
+\vspace{.5cm}
+\begin{center}
+    \today \\ Awesome Person's Name
+\end{center}
+
+\vfill
+
+\begin{tikzpicture}[fill opacity = 1, line cap = round]
+
+    % draw orbit of timber hearth (in sections)
+    \draw[thick, OWOrange, domain = -20:34, samples = 30] plot({8*cos(\x)}, {8*sin(\x)});
+    \draw[thick, OWOrange, domain = 47:120, samples = 40] plot({8*cos(\x)}, {8*sin(\x)});
+    
+    % draw attlerock's orbit (in sections
+    \draw[thick, OWOrange, domain = 90:133, samples = 30] plot({8*cos(40) + 1.7 * cos(\x)}, {8*sin(40) + 1.7 * sin(\x)});
+    \draw[thick, OWOrange, domain = 139:301, samples = 30] plot({8*cos(40) + 1.7 * cos(\x)}, {8*sin(40) + 1.7 * sin(\x)});
+    \draw[thick, OWOrange, domain = 307:420, samples = 30] plot({8*cos(40) + 1.7 * cos(\x)}, {8*sin(40) + 1.7 * sin(\x)});
+
+    % add planet images
+    \node[inner sep=0pt] (Attle) at ({8*cos(40) + 1.7 * cos(75)}, {8*sin(40) + 1.7 * sin(75)}) {\includegraphics[width = .7cm]{./images/attlerock.png}};
+    \node[inner sep=0pt] (Timber) at ({8*cos(40)}, {8*sin(40)}) {\includegraphics[width = 1cm]{./images/timberhearth.png}};
+    \node[inner sep=0pt] (Sun) at (0 ,0) {\includegraphics[width = 2cm]{./images/Sun_IC.png}};
+\end{tikzpicture}
+
+\vspace*{.5cm}
+
+\hypersetup{citecolor=OWPurple}
+\lfoot{\scriptsize \color{OWPurple} Planet Icons by \cite{riwo2022outerwilds}}

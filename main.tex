@@ -1,0 +1,53 @@
+
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{Setup/preamble}
+
+
+
+
+\begin{document}
+
+\input{Sections/00-Titlepage}
+
+\pagenumbering{gobble}
+
+\clearpage
+\lfoot{} % needed if reference in footer of titlepage remains
+\hypersetup{citecolor=OWOrange} % reset stealthier citecolor from titlepage to orange
+
+\tableofcontents
+
+\clearpage
+
+\pagenumbering{arabic}  % set up pagenumbering from this point forward
+\cfoot{\color{OWOrange} \thepage}
+
+\input{Sections/01-Intro}
+
+\clearpage
+
+\input{Sections/02-Methods}
+
+\clearpage
+
+\input{Sections/03-Results}
+
+\clearpage
+
+\input{Sections/04-Conclusion}
+
+\clearpage
+
+\listoftables % print list of tables
+\addcontentsline{toc}{section}{\listtablename} % add list of tables to table of contents
+
+\listoffigures % print list of figures
+\addcontentsline{toc}{section}{\listfigurename} % add list of figures to table of contents
+
+\clearpage
+
+\printbibliography % print references
+\addcontentsline{toc}{section}{\refname} % add references to table of contents
+
+\end{document}
