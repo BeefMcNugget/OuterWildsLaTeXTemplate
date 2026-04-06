@@ -15,8 +15,8 @@
     BoldFont = itc-serif-gothic-extra-bold.otf,
     ItalicFont = itc-serif-gothic-light.otf
 ]
-% \usepackage{mathpazo}      % Serif math
-% Manually force digits to use the Euler (zeur) font in math mode
+
+% Manually force digits to use the Euler font in math mode
 \DeclareSymbolFont{eulernumbers}{U}{zeur}{m}{n}
 \DeclareMathSymbol{0}{\mathalpha}{eulernumbers}{"30}
 \DeclareMathSymbol{1}{\mathalpha}{eulernumbers}{"31}
@@ -40,7 +40,7 @@
 \definecolor{OWGreen}{RGB}{103,110,76}
 \definecolor{OWBlue}{RGB}{23,78,125}
 \definecolor{OWPurple}{RGB}{106,77,117}
-\definecolor{OWDark}{RGB}{11,30,38} % haven't found a use for this yet...
+\definecolor{OWDark}{RGB}{11,30,38} % haven't found a use for this one yet...
 
 \pagecolor{black}
 \color{white} % Set default text to white
@@ -50,9 +50,6 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \setlength{\headheight}{1cm}
-%\lhead{
-%    \includegraphics[width=5cm]{images/System_Narrow.png}
-%}
 \lhead{
     \begin{picture}(0,0)
         \put(0,0){\includegraphics[width=5cm]{images/System_Narrow.png}}		
@@ -61,7 +58,7 @@
 \renewcommand{\headrulewidth}{0pt}
 
 \usepackage{titlesec}
-\titleformat*{\section}{\Large\bfseries\color{OWOrange}}
+\titleformat*{\section}{\Large\bfseries\color{OWOrange}} % setup headlines
 \titleformat*{\subsection}{\large\bfseries\color{OWOrange}}
 \titleformat*{\subsubsection}{\normalsize\bfseries\color{OWOrange}}
 
@@ -109,9 +106,12 @@
 % 5. Tables & Layout
 % ==========================================
 
-\usepackage{booktabs, array, multirow, tabularx}
+\usepackage{booktabs, array, multirow, tabularx, tabularray}
 \usepackage{enumitem}
 \usepackage{soul} 
+\UseTblrLibrary{booktabs} % allow booktabs commands within tabularray / tblr environments
+\renewcommand{\lTblrDefaultHruleColorTl}{OWOrange} % Set line colors in tables to Orange
+\renewcommand{\lTblrDefaultVruleColorTl}{OWOrange}
 
 % ==========================================
 % 6. References & Bibliography
@@ -141,8 +141,7 @@
 % ==========================================
 % 7. Custom Macros
 % ==========================================
-\newcommand{\abs}[1]{\lVert#1\rVert}
-\newcommand{\orangeRule}{\arrayrulecolor{OWOrange}}
+\newcommand{\abs}[1]{\lVert#1\rVert} % custom notation for absolute value
 
 \newcommand\ellipsebyfoci[4]{       % allows to draw an ellipse by its focalpoints and 2 * r_periapsis, something I 
   \path[#1] let \p1=(#2), \p2=(#3), \p3=($(\p1)!.5!(\p2)$) % found very useful when drawing orbits

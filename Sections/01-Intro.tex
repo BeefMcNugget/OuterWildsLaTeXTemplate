@@ -40,17 +40,22 @@ The table style I mostly used (or some variation of this):
 \begin{table}[h]
     \centering
     \caption{Super cool table}
-    \renewcommand{\arraystretch}{1.3} % slightly more spacious array
-    \arrayrulecolor{OWOrange} % make lines Orange
-    \begin{tabular}{c c} % tabularx would allow for more customization if necessary
-        \toprule
-         \textbf{\color{OWOrange} Heading 1} & \textbf{\color{OWOrange} Heading Number Two} \\
+    % \renewcommand{\arraystretch}{1.3} % tblr does this internally!
+    %  Orange line colors now set globally in preamble
+    \begin{tblr}{ % use tblr environment for simpler table customization
+         width = .5\linewidth,
+         colspec = {X[1] c},
+         stretch = 1.3,
+         row{1} = {fg=OWOrange, font=\bfseries} % set first line to all boldface and orange
+         }
+         \toprule
+        Heading 1 & Heading Number Two \\
          \midrule
          Stuff & Numbers \\
          Stuff & Numbers \\
          Stuff & Numbers \\
          \bottomrule
-    \end{tabular}
+    \end{tblr}
     \label{tab:example3}
 \end{table}
 
