@@ -2,7 +2,7 @@
 A clean and professional looking template for articles in the theme of The Outer Wilds.
 
 This template is made for XeLaTeX. Please check that you are using the correct compiler. The main font ITC Serif Gothic is included in the template.
-Otherwise, there is nothing really special about this. The template comes with some design examples and some basic comments on use. The .tex files that you are supposed to do most of your writing are in the Sections file, the rest should be pretty selfexplanatory.
+Otherwise, there is nothing really special about this. The template comes with some design examples and some basic comments on use. The .tex files in which you are supposed to do most of your writing are in the Sections file, the rest should be pretty selfexplanatory.
 
 Two sample pdfs can be found [here](https://github.com/BeefMcNugget/OuterWildsLaTeXTemplate/releases/tag/v1.0.0), with OuterArtemis.pdf being the less polished side project this template was developed from.
 
